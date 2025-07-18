@@ -24,3 +24,7 @@ def update_usuario(db: Session, db_obj, updates):
 def delete_usuario(db: Session, db_obj):
     db.delete(db_obj)
     db.commit()
+
+def get_usuario_by_username(db: Session, username: str):
+    """Return a single Usuario by its username."""
+    return db.query(Usuario).filter(Usuario.usuario == username).first()
