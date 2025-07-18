@@ -1,0 +1,31 @@
+import strawberry
+import strawberry
+from typing import Optional
+from app.schemas.sysMoneda import SysMonedaType, SysMonedaInput
+from app.db import SessionLocal
+from app.crud.sysMoneda import create_sysMoneda, update_sysMoneda, delete_sysMoneda
+
+@strawberry.type
+class SysEstadoChequeMutations:
+    @strawberry.mutation
+    def create_sysMoneda(self, data: SysMonedaInput) -> SysMonedaType:
+        db = SessionLocal()
+        new_obj = create_sysMoneda(db, data.__dict__)
+        db.close()
+        return SysMonedaType(**new_obj.__dict__)
+
+    @strawberry.mutation
+    def update_sysMoneda(self, id_moneda: int, data: SysMonedaInput) -> Optional[SysMonedaType]:
+        db = SessionLocal()
+        updated = update_sysMoneda(db, id_moneda, data.__dict__)
+        db.close()
+        if not updated:
+            return None
+        return SysMonedaType(**updated.__dict__)
+
+    @strawberry.mutation
+    def delete_sysMoneda(self, id_moneda: int) -> bool:
+        db = SessionLocal()
+        result = delete_sysMoneda(db, id_moneda)
+        db.close()
+        return result
