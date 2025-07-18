@@ -1,12 +1,11 @@
 import strawberry
-import strawberry
 from typing import Optional
 from app.schemas.sysMoneda import SysMonedaType, SysMonedaInput
 from app.db import SessionLocal
 from app.crud.sysMoneda import create_sysMoneda, update_sysMoneda, delete_sysMoneda
 
 @strawberry.type
-class SysEstadoChequeMutations:
+class SysMonedaMutations:
     @strawberry.mutation
     def create_sysMoneda(self, data: SysMonedaInput) -> SysMonedaType:
         db = SessionLocal()
