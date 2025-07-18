@@ -40,3 +40,4 @@ def delete_tmpproduccion_item(db: Session, db_obj) -> bool:
     db.commit()
 
     return True
+

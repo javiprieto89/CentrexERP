@@ -1,9 +1,9 @@
 # stubs/strawberry/__init__.pyi
-from typing import Any, Callable, TypeVar
+from dataclasses import dataclass as type
+from typing import Any, TypeVar
 
 _T = TypeVar('_T')
 
-def type(cls: _T = ...) -> Callable[[Any], _T]: ...
 
 def field(resolver: Any = ...) -> Any: ...
 
