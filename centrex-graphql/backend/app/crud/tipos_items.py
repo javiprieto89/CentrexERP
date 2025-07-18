@@ -21,6 +21,10 @@ def update_tipo_item(db: Session, db_obj, updates):
     db.refresh(db_obj)
     return db_obj
 
-def delete_tipo_item(db: Session, db_obj):
-    db.delete(db_obj)
+def delete_tipo_item(db: Session, id_tipoItem: int) -> bool:
+    obj = db.query(TipoItem).filter(TipoItem.id_tipoItem == id_tipoItem).first()
+    if not obj:
+        return False
+    db.delete(obj)
     db.commit()
+    return True

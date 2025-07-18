@@ -21,6 +21,10 @@ def update_sysmodoMiPyme(db: Session, db_obj, updates):
     db.refresh(db_obj)
     return db_obj
 
-def delete_sysmodoMiPyme(db: Session, db_obj):
-    db.delete(db_obj)
+def delete_sysmodoMiPyme(db: Session, id_modoMiPyme: int) -> bool:
+    obj = db.query(SysModoMiPyme).filter(SysModoMiPyme.id_modoMiPyme == id_modoMiPyme).first()
+    if not obj:
+        return False
+    db.delete(obj)
     db.commit()
+    return True

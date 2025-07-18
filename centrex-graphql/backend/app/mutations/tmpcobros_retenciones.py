@@ -1,3 +1,4 @@
+# centrex-graphql/backend/app/mutations/tmpcobros_retenciones.py
 import strawberry
 from typing import Optional
 from app.schemas.tmpcobros_retenciones import TmpCobroRetencionType, TmpCobroRetencionInput

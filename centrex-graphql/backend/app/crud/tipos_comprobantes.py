@@ -21,6 +21,10 @@ def update_tipo_comprobante(db: Session, db_obj, updates):
     db.refresh(db_obj)
     return db_obj
 
-def delete_tipo_comprobante(db: Session, db_obj):
-    db.delete(db_obj)
+def delete_tipo_comprobante(db: Session, id_tipoComprobante: int) -> bool:
+    obj = db.query(TipoComprobante).filter(TipoComprobante.id_tipoComprobante == id_tipoComprobante).first()
+    if not obj:
+        return False
+    db.delete(obj)
     db.commit()
+    return True

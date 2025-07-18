@@ -1,5 +1,5 @@
 import strawberry
-from typing import List, Optional
+from typing import List, Optional, cast
 from app.schemas.ajustes_stock import AjusteStockType
 from app.db import SessionLocal
 from app.crud.ajustes_stock import get_ajuste_stock, get_ajustes_stock
@@ -18,7 +18,7 @@ class AjusteStockQueries:
                 id_usuario=a.id_usuario,
                 motivo=a.motivo,
                 id_item=a.id_item,
-                cantidad=float(a.cantidad),
+                cantidad=float(cast(int, a.cantidad)),
                 comentario=a.comentario,
                 activo=a.activo
             ) for a in result
@@ -37,7 +37,7 @@ class AjusteStockQueries:
             id_usuario=a.id_usuario,
             motivo=a.motivo,
             id_item=a.id_item,
-            cantidad=float(a.cantidad),
+            cantidad=float(cast(int, a.cantidad)),
             comentario=a.comentario,
             activo=a.activo
         )
