@@ -3,10 +3,11 @@ from sqlalchemy.orm import sessionmaker, declarative_base
 import os
 
 # Datos de conexión a la base de datos. Se puede configurar con la variable
-# de entorno DATABASE_URL. Por defecto se usa SQLite para facilitar el inicio.
+# de entorno DATABASE_URL. De forma predeterminada se conecta a SQL Server
+# en 127.0.0.1 utilizando las credenciales proporcionadas.
 SQLALCHEMY_DATABASE_URL = os.getenv(
     "DATABASE_URL",
-    "sqlite:///./development.db",
+    "mssql+pyodbc://sa:Ladeda78@127.0.0.1/dbCentrex?driver=ODBC+Driver+17+for+SQL+Server",
 )
 
 engine_kwargs = {"echo": True}
