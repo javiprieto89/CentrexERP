@@ -4,6 +4,7 @@ from typing import Any, TypeVar
 
 _T = TypeVar('_T')
 
+
 def field(resolver: Any = ...) -> Any: ...
 
 class Schema:
