@@ -34,7 +34,9 @@ def update_tmpproduccion_item(db: Session, db_obj, updates):
     db.refresh(db_obj)
     return db_obj
 
-def delete_tmpproduccion_item(db: Session, db_obj):
+def delete_tmpproduccion_item(db: Session, db_obj) -> bool:
+    """Delete the given TmpProduccionItem and return True if successful."""
     db.delete(db_obj)
     db.commit()
 
+    return True

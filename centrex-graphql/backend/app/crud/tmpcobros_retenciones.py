@@ -34,7 +34,10 @@ def update_tmpcobro_retencion(db: Session, db_obj, updates):
     db.refresh(db_obj)
     return db_obj
 
-def delete_tmpcobro_retencion(db: Session, db_obj):
+def delete_tmpcobro_retencion(db: Session, db_obj) -> bool:
+    """Delete the given TmpCobroRetencion and return True if successful."""
     db.delete(db_obj)
     db.commit()
+
+    return True
 
