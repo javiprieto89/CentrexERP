@@ -21,6 +21,10 @@ def update_transferencia(db: Session, db_obj, updates):
     db.refresh(db_obj)
     return db_obj
 
-def delete_transferencia(db: Session, db_obj):
-    db.delete(db_obj)
+def delete_transferencia(db: Session, id_transferencia: int) -> bool:
+    obj = db.query(Transferencia).filter(Transferencia.id_transferencia == id_transferencia).first()
+    if not obj:
+        return False
+    db.delete(obj)
     db.commit()
+    return True

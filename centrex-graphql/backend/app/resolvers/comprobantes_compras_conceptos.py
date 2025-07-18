@@ -1,5 +1,6 @@
 import strawberry
-from typing import List, Optional
+from typing import List, Optional, cast
+from decimal import Decimal
 from app.schemas.comprobantes_compras_conceptos import ComprobanteCompraConceptoType
 from app.db import SessionLocal
 from app.crud.comprobantes_compras_conceptos import get_comprobante_compra_concepto, get_comprobantes_compras_conceptos
@@ -16,7 +17,7 @@ class ComprobanteCompraConceptoQueries:
                 id_concepto=c.id_concepto,
                 id_comprobante_compra=c.id_comprobante_compra,
                 descripcion=c.descripcion,
-                importe=float(c.importe)
+                importe=float(cast(Decimal, c.importe))
             ) for c in result
         ]
 
@@ -31,5 +32,5 @@ class ComprobanteCompraConceptoQueries:
             id_concepto=c.id_concepto,
             id_comprobante_compra=c.id_comprobante_compra,
             descripcion=c.descripcion,
-            importe=float(c.importe)
+            importe=float(cast(Decimal, c.importe))
         )

@@ -1,5 +1,6 @@
 import strawberry
-from typing import List, Optional
+from typing import List, Optional, cast
+from decimal import Decimal
 from app.schemas.cobros_retenciones import CobroRetencionType
 from app.db import SessionLocal
 from app.crud.cobros_retenciones import get_cobro_retencion, get_cobros_retenciones
@@ -16,7 +17,7 @@ class CobroRetencionQueries:
                 id_cobro_retencion=c.id_cobro_retencion,
                 id_cobro=c.id_cobro,
                 tipo_retencion=c.tipo_retencion,
-                importe=float(c.importe)
+                importe=float(cast(Decimal, c.importe))
             ) for c in result
         ]
 
@@ -31,5 +32,5 @@ class CobroRetencionQueries:
             id_cobro_retencion=c.id_cobro_retencion,
             id_cobro=c.id_cobro,
             tipo_retencion=c.tipo_retencion,
-            importe=float(c.importe)
+            importe=float(cast(Decimal, c.importe))
         )

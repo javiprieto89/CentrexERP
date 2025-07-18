@@ -21,6 +21,10 @@ def update_usuario_perfil(db: Session, db_obj, updates):
     db.refresh(db_obj)
     return db_obj
 
-def delete_usuario_perfil(db: Session, db_obj):
-    db.delete(db_obj)
+def delete_usuario_perfil(db: Session, id_usuario_perfil: int) -> bool:
+    obj = db.query(UsuarioPerfil).filter(UsuarioPerfil.id_usuarioPerfil == id_usuario_perfil).first()
+    if not obj:
+        return False
+    db.delete(obj)
     db.commit()
+    return True

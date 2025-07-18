@@ -1,5 +1,6 @@
 import strawberry
-from typing import List, Optional
+from typing import List, Optional, cast
+from decimal import Decimal
 from app.schemas.comprobantes_compras_impuestos import ComprobanteCompraImpuestoType
 from app.db import SessionLocal
 from app.crud.comprobantes_compras_impuestos import get_comprobante_compra_impuesto, get_comprobantes_compras_impuestos
@@ -16,7 +17,7 @@ class ComprobanteCompraImpuestoQueries:
                 id_impuesto=c.id_impuesto,
                 id_comprobante_compra=c.id_comprobante_compra,
                 tipo_impuesto=c.tipo_impuesto,
-                importe=float(c.importe)
+                importe=float(cast(Decimal, c.importe))
             ) for c in result
         ]
 
@@ -31,5 +32,5 @@ class ComprobanteCompraImpuestoQueries:
             id_impuesto=c.id_impuesto,
             id_comprobante_compra=c.id_comprobante_compra,
             tipo_impuesto=c.tipo_impuesto,
-            importe=float(c.importe)
+            importe=float(cast(Decimal, c.importe))
         )

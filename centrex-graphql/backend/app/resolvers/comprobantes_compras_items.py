@@ -1,5 +1,6 @@
 import strawberry
-from typing import List, Optional
+from typing import List, Optional, cast
+from decimal import Decimal
 from app.schemas.comprobantes_compras_items import ComprobanteCompraItemType
 from app.db import SessionLocal
 from app.crud.comprobantes_compras_items import get_comprobante_compra_item, get_comprobantes_compras_items
@@ -16,9 +17,9 @@ class ComprobanteCompraItemQueries:
                 id_item=c.id_item,
                 id_comprobante_compra=c.id_comprobante_compra,
                 descripcion=c.descripcion,
-                cantidad=float(c.cantidad),
-                precio_unitario=float(c.precio_unitario),
-                subtotal=float(c.subtotal)
+                cantidad=float(cast(Decimal, c.cantidad)),
+                precio_unitario=float(cast(Decimal, c.precio_unitario)),
+                subtotal=float(cast(Decimal, c.subtotal))
             ) for c in result
         ]
 
@@ -33,7 +34,7 @@ class ComprobanteCompraItemQueries:
             id_item=c.id_item,
             id_comprobante_compra=c.id_comprobante_compra,
             descripcion=c.descripcion,
-            cantidad=float(c.cantidad),
-            precio_unitario=float(c.precio_unitario),
-            subtotal=float(c.subtotal)
+            cantidad=float(cast(Decimal, c.cantidad)),
+            precio_unitario=float(cast(Decimal, c.precio_unitario)),
+            subtotal=float(cast(Decimal, c.subtotal))
         )

@@ -1,5 +1,6 @@
 import strawberry
-from typing import List, Optional
+from typing import List, Optional, cast
+from decimal import Decimal
 from app.schemas.cambios import CambioType
 from app.db import SessionLocal
 from app.crud.cambios import get_cambio, get_cambios
@@ -17,7 +18,7 @@ class CambioQueries:
                 fecha=c.fecha,
                 id_moneda_origen=c.id_moneda_origen,
                 id_moneda_destino=c.id_moneda_destino,
-                valor=float(c.valor)
+                valor=float(cast(Decimal, c.valor))
             ) for c in result
         ]
 
@@ -33,5 +34,5 @@ class CambioQueries:
             fecha=c.fecha,
             id_moneda_origen=c.id_moneda_origen,
             id_moneda_destino=c.id_moneda_destino,
-            valor=float(c.valor)
+            valor=float(cast(Decimal, c.valor))
         )

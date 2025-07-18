@@ -1,5 +1,6 @@
 import strawberry
-from typing import List, Optional
+from typing import List, Optional, cast
+from decimal import Decimal
 from app.schemas.impuestos import ImpuestoType
 from app.db import SessionLocal
 from app.crud.impuestos import get_impuesto, get_impuestos
@@ -16,7 +17,7 @@ class ImpuestoQueries:
                 id_impuesto=c.id_impuesto,
                 nombre=c.nombre,
                 descripcion=c.descripcion,
-                porcentaje=float(c.porcentaje)
+                porcentaje=float(cast(Decimal, c.porcentaje))
             ) for c in result
         ]
 
@@ -31,5 +32,5 @@ class ImpuestoQueries:
             id_impuesto=c.id_impuesto,
             nombre=c.nombre,
             descripcion=c.descripcion,
-            porcentaje=float(c.porcentaje)
+            porcentaje=float(cast(Decimal, c.porcentaje))
         )
