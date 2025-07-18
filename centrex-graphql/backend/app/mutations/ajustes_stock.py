@@ -28,3 +28,6 @@ class AjusteStockMutations:
         result = delete_ajuste_stock(db, id_ajuste_stock)
         db.close()
         return result
+
+# Alias for backward compatibility
+AjustesStockMutations = AjusteStockMutations
