@@ -28,3 +28,11 @@ class AjusteStockMutations:
         result = delete_ajuste_stock(db, id_ajuste_stock)
         db.close()
         return result
+
+# Alias for backward compatibility with old imports
+AjustesStockMutations = AjusteStockMutations
+
+__all__ = [
+    "AjusteStockMutations",
+    "AjustesStockMutations",
+]
