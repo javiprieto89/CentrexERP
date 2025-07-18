@@ -8,26 +8,26 @@ from app.db import SessionLocal, engine, Base
 from app.schemas import UsuarioType
 from app.models import Usuario
 
-from app.mutations.ajustes_stock import AjustesStockMutations
+from app.mutations.ajustes_stock import AjusteStockMutations
 from app.mutations.asocItems import AsocItemMutations
 from app.mutations.bancos import BancoMutations
 from app.mutations.cajas import CajaMutations
-from app.mutations.cambios import CambiosMutations
-from app.mutations.cc_clientes import CcClienteMutations
-from app.mutations.cc_proveedores import CcProveedoreMutations
+from app.mutations.cambios import CambioMutations
+from app.mutations.cc_clientes import CCClienteMutations
+from app.mutations.cc_proveedores import CCProveedorMutations
 from app.mutations.cheques import ChequeMutations
 from app.mutations.clientes import ClienteMutations
 from app.mutations.cobros import CobroMutations
-from app.mutations.cobros_cheques import CobrosChequeMutations
-from app.mutations.cobros_Nfacturas_importes import CobrosNFacturasImporteMutations
-from app.mutations.cobros_retenciones import CobrosRetencionMutations
+from app.mutations.cobros_cheques import CobroChequeMutations
+from app.mutations.cobros_Nfacturas_importes import CobroNFacturaImporteMutations
+from app.mutations.cobros_retenciones import CobroRetencionMutations
 from app.mutations.comprobantes import ComprobanteMutations
-from app.mutations.comprobantes_compras import ComprobantesCompraMutations
-from app.mutations.comprobantes_compras_conceptos import ComprobantesComprasConceptoMutations
-from app.mutations.comprobantes_compras_impuestos import ComprobantesComprasImpuestoMutations
-from app.mutations.comprobantes_compras_items import ComprobantesComprasItemMutations
-from app.mutations.conceptos_compra import ConceptosCompraMutations
-from app.mutations.condiciones_compra import CondicionesCompraMutations
+from app.mutations.comprobantes_compras import ComprobanteCompraMutations
+from app.mutations.comprobantes_compras_conceptos import ComprobanteCompraConceptoMutations
+from app.mutations.comprobantes_compras_impuestos import ComprobanteCompraImpuestoMutations
+from app.mutations.comprobantes_compras_items import ComprobanteCompraItemMutations
+from app.mutations.conceptos_compra import ConceptoCompraMutations
+from app.mutations.condiciones_compra import CondicionCompraMutations
 from app.mutations.consultas_personalizadas import ConsultaPersonalizadaMutations
 from app.mutations.cuentas_bancarias import CuentaBancariaMutations
 from app.mutations.empresa import EmpresaMutations
@@ -35,7 +35,7 @@ from app.mutations.impuestos import ImpuestoMutations
 from app.mutations.items import ItemMutations
 from app.mutations.items_impuestos import ItemImpuestoMutations
 from app.mutations.marcas_items import MarcaItemMutations
-from app.mutations.ordenesCompras_items import OrdeneCompraItemMutations
+from app.mutations.ordenesCompras_items import OrdenCompraItemMutations
 from app.mutations.ordenes_compras import OrdenCompraMutations
 from app.mutations.pagos import PagoMutations
 from app.mutations.pagos_cheques import PagoChequeMutations
@@ -45,7 +45,7 @@ from app.mutations.pedidos import PedidoMutations
 from app.mutations.pedidos_items import PedidoItemMutations
 from app.mutations.perfiles import PerfilMutations
 from app.mutations.permisos import PermisoMutations
-from app.mutations.permisos_perfiles import PermisoPerfileMutations
+from app.mutations.permisos_perfiles import PermisoPerfilMutations
 from app.mutations.produccion import ProduccionMutations
 from app.mutations.produccion_asocItems import ProduccionAsocItemMutations
 from app.mutations.produccion_items import ProduccionItemMutations
@@ -58,7 +58,7 @@ from app.mutations.sysMoneda import SysMonedaMutations
 from app.mutations.sys_claseComprobante import SysClaseComprobanteMutations
 from app.mutations.sys_ClasesFiscales import SysClaseFiscalMutations
 from app.mutations.sys_modoMiPyme import SysModoMiPymeMutations
-from app.mutations.tipos_comprobantes import TipoComprobanteMutations
+from app.mutations.tipos_comprobantes import TiposComprobantesMutations
 from app.mutations.tipos_documentos import TipoDocumentoMutations
 from app.mutations.tipos_items import TipoItemMutations
 from app.mutations.tmpcobros_retenciones import TmpCobroRetencionMutations
@@ -104,26 +104,26 @@ class Query:
 
 @strawberry.type
 class Mutation(
-    AjustesStockMutations,
+    AjusteStockMutations,
     AsocItemMutations,
     BancoMutations,
     CajaMutations,
-    CambiosMutations,
-    CcClienteMutations,
-    CcProveedoreMutations,
+    CambioMutations,
+    CCClienteMutations,
+    CCProveedorMutations,
     ChequeMutations,
     ClienteMutations,
     CobroMutations,
-    CobrosChequeMutations,
-    CobrosNFacturasImporteMutations,
-    CobrosRetencionMutations,
+    CobroChequeMutations,
+    CobroNFacturaImporteMutations,
+    CobroRetencionMutations,
     ComprobanteMutations,
-    ComprobantesCompraMutations,
-    ComprobantesComprasConceptoMutations,
-    ComprobantesComprasImpuestoMutations,
-    ComprobantesComprasItemMutations,
-    ConceptosCompraMutations,
-    CondicionesCompraMutations,
+    ComprobanteCompraMutations,
+    ComprobanteCompraConceptoMutations,
+    ComprobanteCompraImpuestoMutations,
+    ComprobanteCompraItemMutations,
+    ConceptoCompraMutations,
+    CondicionCompraMutations,
     ConsultaPersonalizadaMutations,
     CuentaBancariaMutations,
     EmpresaMutations,
@@ -131,7 +131,7 @@ class Mutation(
     ItemMutations,
     ItemImpuestoMutations,
     MarcaItemMutations,
-    OrdeneCompraItemMutations,
+    OrdenCompraItemMutations,
     OrdenCompraMutations,
     PagoMutations,
     PagoChequeMutations,
@@ -141,7 +141,7 @@ class Mutation(
     PedidoItemMutations,
     PerfilMutations,
     PermisoMutations,
-    PermisoPerfileMutations,
+    PermisoPerfilMutations,
     ProduccionMutations,
     ProduccionAsocItemMutations,
     ProduccionItemMutations,
@@ -154,7 +154,7 @@ class Mutation(
     SysClaseComprobanteMutations,
     SysClaseFiscalMutations,
     SysModoMiPymeMutations,
-    TipoComprobanteMutations,
+    TiposComprobantesMutations,
     TipoDocumentoMutations,
     TipoItemMutations,
     TmpCobroRetencionMutations,
