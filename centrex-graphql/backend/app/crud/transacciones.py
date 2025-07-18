@@ -21,6 +21,10 @@ def update_transaccion(db: Session, db_obj, updates):
     db.refresh(db_obj)
     return db_obj
 
-def delete_transaccion(db: Session, db_obj):
-    db.delete(db_obj)
+def delete_transaccion(db: Session, id_transaccion: int) -> bool:
+    obj = db.query(Transaccion).filter(Transaccion.id_transaccion == id_transaccion).first()
+    if not obj:
+        return False
+    db.delete(obj)
     db.commit()
+    return True

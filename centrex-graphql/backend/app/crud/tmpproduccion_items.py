@@ -1,6 +1,15 @@
 from app.models.tmpproduccion_items import TmpProduccionItem
 from sqlalchemy.orm import Session
 
+__all__ = [
+    "get_all_tmpproduccion_items",
+    "get_tmpproduccion_items_by_id",
+    "get_tmpproduccion_item_by_id",
+    "create_tmpproduccion_item",
+    "update_tmpproduccion_item",
+    "delete_tmpproduccion_item",
+]
+
 def get_all_tmpproduccion_items(db: Session):
     return db.query(TmpProduccionItem).all()
 

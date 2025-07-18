@@ -1,6 +1,15 @@
 from app.models.tmpcobros_retenciones import TmpCobroRetencion
 from sqlalchemy.orm import Session
 
+__all__ = [
+    "get_all_tmpcobros_retenciones",
+    "get_tmpcobros_retenciones_by_id",
+    "get_tmpcobro_retencion_by_id",
+    "create_tmpcobro_retencion",
+    "update_tmpcobro_retencion",
+    "delete_tmpcobro_retencion",
+]
+
 def get_all_tmpcobros_retenciones(db: Session):
     return db.query(TmpCobroRetencion).all()
 

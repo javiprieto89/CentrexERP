@@ -21,6 +21,10 @@ def update_tipo_documento(db: Session, db_obj, updates):
     db.refresh(db_obj)
     return db_obj
 
-def delete_tipo_documento(db: Session, db_obj):
-    db.delete(db_obj)
+def delete_tipo_documento(db: Session, id_tipoDocumento: int) -> bool:
+    obj = db.query(TipoDocumento).filter(TipoDocumento.id_tipoDocumento == id_tipoDocumento).first()
+    if not obj:
+        return False
+    db.delete(obj)
     db.commit()
+    return True
