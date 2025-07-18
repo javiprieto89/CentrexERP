@@ -1,5 +1,6 @@
 import strawberry
-from typing import List, Optional
+from typing import List, Optional, cast
+from decimal import Decimal
 from app.schemas.pedidos import PedidoType
 from app.db import SessionLocal
 from app.crud.pedidos import get_pedido, get_pedidos
@@ -17,7 +18,7 @@ class PedidoQueries:
                 id_cliente=c.id_cliente,
                 fecha=c.fecha,
                 estado=c.estado,
-                total=float(c.total) if c.total is not None else None,
+                total=float(cast(Decimal, c.total)) if c.total is not None else None,
                 observaciones=c.observaciones
             ) for c in result
         ]
@@ -34,6 +35,6 @@ class PedidoQueries:
             id_cliente=c.id_cliente,
             fecha=c.fecha,
             estado=c.estado,
-            total=float(c.total) if c.total is not None else None,
+            total=float(cast(Decimal, c.total)) if c.total is not None else None,
             observaciones=c.observaciones
         )

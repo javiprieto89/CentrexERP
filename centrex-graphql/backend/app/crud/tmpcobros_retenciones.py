@@ -7,6 +7,10 @@ def get_all_tmpcobros_retenciones(db: Session):
 def get_tmpcobros_retenciones_by_id(db: Session, id: int):
     return db.query(TmpCobroRetencion).filter(TmpCobroRetencion.id_tmpCobroRetencion == id).first()
 
+def get_tmpcobro_retencion_by_id(db: Session, id: int):
+    """Return a single TmpCobroRetencion by its primary key."""
+    return db.query(TmpCobroRetencion).filter(TmpCobroRetencion.id_tmpCobroRetencion == id).first()
+
 def create_tmpcobro_retencion(db: Session, obj):
     db_obj = TmpCobroRetencion(**obj.dict())
     db.add(db_obj)
@@ -24,3 +28,4 @@ def update_tmpcobro_retencion(db: Session, db_obj, updates):
 def delete_tmpcobro_retencion(db: Session, db_obj):
     db.delete(db_obj)
     db.commit()
+

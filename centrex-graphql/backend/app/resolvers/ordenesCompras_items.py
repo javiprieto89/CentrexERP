@@ -1,5 +1,6 @@
 import strawberry
-from typing import List, Optional
+from typing import List, Optional, cast
+from decimal import Decimal
 from app.schemas.ordenesCompras_items import OrdenCompraItemType
 from app.db import SessionLocal
 from app.crud.ordenesCompras_items import get_orden_compra_item, get_ordenes_compras_items
@@ -16,9 +17,9 @@ class OrdenCompraItemQueries:
                 id_orden_item=c.id_orden_item,
                 id_orden=c.id_orden,
                 id_item=c.id_item,
-                cantidad=float(c.cantidad),
-                precio_unitario=float(c.precio_unitario),
-                subtotal=float(c.subtotal)
+                cantidad=float(cast(Decimal, c.cantidad)),
+                precio_unitario=float(cast(Decimal, c.precio_unitario)),
+                subtotal=float(cast(Decimal, c.subtotal))
             ) for c in result
         ]
 
@@ -33,7 +34,7 @@ class OrdenCompraItemQueries:
             id_orden_item=c.id_orden_item,
             id_orden=c.id_orden,
             id_item=c.id_item,
-            cantidad=float(c.cantidad),
-            precio_unitario=float(c.precio_unitario),
-            subtotal=float(c.subtotal)
+            cantidad=float(cast(Decimal, c.cantidad)),
+            precio_unitario=float(cast(Decimal, c.precio_unitario)),
+            subtotal=float(cast(Decimal, c.subtotal))
         )

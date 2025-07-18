@@ -1,5 +1,6 @@
 import strawberry
-from typing import List, Optional
+from typing import List, Optional, cast
+from decimal import Decimal
 from app.schemas.pagos import PagoType
 from app.db import SessionLocal
 from app.crud.pagos import get_pago, get_pagos
@@ -16,7 +17,7 @@ class PagoQueries:
                 id_pago=c.id_pago,
                 id_proveedor=c.id_proveedor,
                 fecha=c.fecha,
-                total=float(c.total),
+                total=float(cast(Decimal, c.total)),
                 estado=c.estado,
                 observaciones=c.observaciones
             ) for c in result
@@ -33,7 +34,7 @@ class PagoQueries:
             id_pago=c.id_pago,
             id_proveedor=c.id_proveedor,
             fecha=c.fecha,
-            total=float(c.total),
+            total=float(cast(Decimal, c.total)),
             estado=c.estado,
             observaciones=c.observaciones
         )
