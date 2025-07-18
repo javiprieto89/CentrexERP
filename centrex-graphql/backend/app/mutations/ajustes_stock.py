@@ -29,10 +29,10 @@ class AjusteStockMutations:
         db.close()
         return result
 
-# Alias for backward compatibility with old imports
 AjustesStockMutations = AjusteStockMutations
 
 __all__ = [
     "AjusteStockMutations",
     "AjustesStockMutations",
 ]
+
