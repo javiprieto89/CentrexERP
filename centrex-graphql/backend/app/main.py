@@ -4,6 +4,8 @@ main.py - Entry point for the GraphQL API using Strawberry and SQLAlchemy.
 
 import strawberry
 from strawberry.asgi import GraphQL
+from starlette.applications import Starlette
+from starlette.middleware.cors import CORSMiddleware
 from app.db import SessionLocal, engine, Base
 from app.schemas import UsuarioType
 from app.models import Usuario
@@ -173,7 +175,17 @@ class Mutation(
     pass
 
 schema = strawberry.Schema(query=Query, mutation=Mutation)
-app = GraphQL(schema)
+graphql_app = GraphQL(schema)
+
+# Starlette app with CORS enabled and GraphQL mounted at /graphql
+app = Starlette()
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+app.mount("/graphql", graphql_app)
 
 if __name__ == "__main__":
     import uvicorn

@@ -29,6 +29,7 @@ const Login: React.FC<Props> = ({ onLogin }) => {
         <input
           type="text"
           placeholder="Usuario"
+          autoComplete="username"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
           className="border p-2 w-full mb-2"
@@ -36,6 +37,7 @@ const Login: React.FC<Props> = ({ onLogin }) => {
         <input
           type="password"
           placeholder="Contraseña"
+          autoComplete="current-password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           className="border p-2 w-full mb-4"
