@@ -1,5 +1,6 @@
 import strawberry
-from typing import List, Optional
+from typing import List, Optional, cast
+from decimal import Decimal
 from app.schemas.cuentas_bancarias import CuentaBancariaType
 from app.db import SessionLocal
 from app.crud.cuentas_bancarias import get_cuenta_bancaria, get_cuentas_bancarias
@@ -19,7 +20,7 @@ class CuentaBancariaQueries:
                 numero=c.numero,
                 titular=c.titular,
                 cbu=c.cbu,
-                saldo=float(c.saldo)
+                saldo=float(cast(Decimal, c.saldo))
             ) for c in result
         ]
 
@@ -37,5 +38,5 @@ class CuentaBancariaQueries:
             numero=c.numero,
             titular=c.titular,
             cbu=c.cbu,
-            saldo=float(c.saldo)
+            saldo=float(cast(Decimal, c.saldo))
         )

@@ -28,3 +28,4 @@ def update_tmpcobro_retencion(db: Session, db_obj, updates):
 def delete_tmpcobro_retencion(db: Session, db_obj):
     db.delete(db_obj)
     db.commit()
+

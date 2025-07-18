@@ -1,5 +1,6 @@
 import strawberry
-from typing import List, Optional
+from typing import List, Optional, cast
+from decimal import Decimal
 from app.schemas.ordenes_compras import OrdenCompraType
 from app.db import SessionLocal
 from app.crud.ordenes_compras import get_orden_compra, get_ordenes_compras
@@ -17,7 +18,7 @@ class OrdenCompraQueries:
                 id_proveedor=c.id_proveedor,
                 fecha=c.fecha,
                 estado=c.estado,
-                total=float(c.total) if c.total is not None else None,
+                total=float(cast(Decimal, c.total)) if c.total is not None else None,
                 observaciones=c.observaciones
             ) for c in result
         ]
@@ -34,6 +35,6 @@ class OrdenCompraQueries:
             id_proveedor=c.id_proveedor,
             fecha=c.fecha,
             estado=c.estado,
-            total=float(c.total) if c.total is not None else None,
+            total=float(cast(Decimal, c.total)) if c.total is not None else None,
             observaciones=c.observaciones
         )
