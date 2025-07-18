@@ -2,7 +2,12 @@ import strawberry
 from typing import Optional
 from app.schemas.tmpproduccion_items import TmpProduccionItemType, TmpProduccionItemInput
 from app.db import SessionLocal
-from app.crud.tmpproduccion_items import create_tmpproduccion_item, update_tmpproduccion_item, delete_tmpproduccion_item
+from app.crud.tmpproduccion_items import (
+    create_tmpproduccion_item,
+    update_tmpproduccion_item,
+    delete_tmpproduccion_item,
+    get_tmpproduccion_item_by_id,
+)
 
 @strawberry.type
 class TmpProduccionItemMutations:
@@ -25,6 +30,10 @@ class TmpProduccionItemMutations:
     @strawberry.mutation
     def delete_tmp_produccion_item(self, id_tmpProduccionItem: int) -> bool:
         db = SessionLocal()
-        result = delete_tmpproduccion_item(db, id_tmpProduccionItem)
+        obj = get_tmpproduccion_item_by_id(db, id_tmpProduccionItem)
+        if not obj:
+            db.close()
+            return False
+        delete_tmpproduccion_item(db, obj)
         db.close()
-        return result
+        return True

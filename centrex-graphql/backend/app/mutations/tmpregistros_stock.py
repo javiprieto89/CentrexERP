@@ -2,7 +2,12 @@ import strawberry
 from typing import Optional
 from app.schemas.tmpregistros_stock import TmpRegistroStockType, TmpRegistroStockInput
 from app.db import SessionLocal
-from app.crud.tmpregistros_stock import create_tmpregistro_stock, update_tmpregistro_stock, delete_tmpregistro_stock
+from app.crud.tmpregistros_stock import (
+    create_tmpregistro_stock,
+    update_tmpregistro_stock,
+    delete_tmpregistro_stock,
+    get_tmpregistros_stock_by_id,
+)
 
 @strawberry.type
 class TmpRegistroStockMutations:
@@ -25,6 +30,10 @@ class TmpRegistroStockMutations:
     @strawberry.mutation
     def delete_tmp_registro_stock(self, id_tmpRegistroStock: int) -> bool:
         db = SessionLocal()
-        result = delete_tmpregistro_stock(db, id_tmpRegistroStock)
+        obj = get_tmpregistros_stock_by_id(db, id_tmpRegistroStock)
+        if not obj:
+            db.close()
+            return False
+        delete_tmpregistro_stock(db, obj)
         db.close()
-        return result
+        return True

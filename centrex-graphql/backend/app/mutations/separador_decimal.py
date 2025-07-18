@@ -2,7 +2,12 @@ import strawberry
 from typing import Optional
 from app.schemas.separador_decimal import SeparadorDecimalType, SeparadorDecimalInput
 from app.db import SessionLocal
-from app.crud.separador_decimal import create_separador_decimal, update_separador_decimal, delete_separador_decimal
+from app.crud.separador_decimal import (
+    create_separador_decimal,
+    update_separador_decimal,
+    delete_separador_decimal,
+    get_separador_decimal_by_id,
+)
 
 @strawberry.type
 class SeparadorDecimalMutations:
@@ -25,6 +30,10 @@ class SeparadorDecimalMutations:
     @strawberry.mutation
     def delete_separador_decimal(self, id_separador: int) -> bool:
         db = SessionLocal()
-        result = delete_separador_decimal(db, id_separador)
+        obj = get_separador_decimal_by_id(db, id_separador)
+        if not obj:
+            db.close()
+            return False
+        delete_separador_decimal(db, obj)
         db.close()
-        return result
+        return True

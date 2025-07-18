@@ -1,5 +1,7 @@
+# app/resolvers/cobros_Nfacturas_importes.py
 import strawberry
-from typing import List, Optional
+from typing import List, Optional, cast
+from decimal import Decimal
 from app.schemas.cobros_Nfacturas_importes import CobroNFacturaImporteType
 from app.db import SessionLocal
 from app.crud.cobros_Nfacturas_importes import get_cobro_nfactura_importe, get_cobros_nfacturas_importes
@@ -16,7 +18,7 @@ class CobroNFacturaImporteQueries:
                 id_cobro_nfactura_importe=c.id_cobro_nfactura_importe,
                 id_cobro=c.id_cobro,
                 id_factura=c.id_factura,
-                importe=float(c.importe)
+                importe=float(cast(Decimal, c.importe))
             ) for c in result
         ]
 
@@ -31,5 +33,5 @@ class CobroNFacturaImporteQueries:
             id_cobro_nfactura_importe=c.id_cobro_nfactura_importe,
             id_cobro=c.id_cobro,
             id_factura=c.id_factura,
-            importe=float(c.importe)
+            importe=float(cast(Decimal, c.importe))
         )

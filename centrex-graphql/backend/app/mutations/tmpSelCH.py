@@ -2,7 +2,12 @@ import strawberry
 from typing import Optional
 from app.schemas.tmpSelCH import TmpSelCHType, TmpSelCHInput
 from app.db import SessionLocal
-from app.crud.tmpSelCH import create_tmpSelCH, update_tmpSelCH, delete_tmpSelCH
+from app.crud.tmpSelCH import (
+    create_tmpSelCH,
+    update_tmpSelCH,
+    delete_tmpSelCH,
+    get_tmpSelCH_by_id,
+)
 
 @strawberry.type
 class TmpSelCHMutations:
@@ -25,6 +30,10 @@ class TmpSelCHMutations:
     @strawberry.mutation
     def delete_tmp_selch(self, id_tmpSelCH: int) -> bool:
         db = SessionLocal()
-        result = delete_tmpSelCH(db, id_tmpSelCH)
+        obj = get_tmpSelCH_by_id(db, id_tmpSelCH)
+        if not obj:
+            db.close()
+            return False
+        delete_tmpSelCH(db, obj)
         db.close()
-        return result
+        return True
