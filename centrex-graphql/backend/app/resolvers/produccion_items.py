@@ -1,5 +1,6 @@
 import strawberry
-from typing import List, Optional
+from typing import List, Optional, cast
+from decimal import Decimal
 from app.schemas.produccion_items import ProduccionItemType
 from app.db import SessionLocal
 from app.crud.produccion_items import get_produccion_item, get_produccion_items
@@ -16,7 +17,7 @@ class ProduccionItemQueries:
                 id_produccion_item=c.id_produccion_item,
                 id_produccion=c.id_produccion,
                 id_item=c.id_item,
-                cantidad=float(c.cantidad)
+                cantidad=float(cast(Decimal, c.cantidad))
             ) for c in result
         ]
 
@@ -31,5 +32,5 @@ class ProduccionItemQueries:
             id_produccion_item=c.id_produccion_item,
             id_produccion=c.id_produccion,
             id_item=c.id_item,
-            cantidad=float(c.cantidad)
+            cantidad=float(cast(Decimal, c.cantidad))
         )

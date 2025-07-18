@@ -1,5 +1,6 @@
 import strawberry
-from typing import List, Optional
+from typing import List, Optional, cast
+from decimal import Decimal
 from app.schemas.pagos_cheques import PagoChequeType
 from app.db import SessionLocal
 from app.crud.pagos_cheques import get_pago_cheque, get_pagos_cheques
@@ -16,7 +17,7 @@ class PagoChequeQueries:
                 id_pago_cheque=c.id_pago_cheque,
                 id_pago=c.id_pago,
                 id_cheque=c.id_cheque,
-                monto=float(c.monto),
+                monto=float(cast(Decimal, c.monto)),
                 fecha_aplicacion=c.fecha_aplicacion
             ) for c in result
         ]
@@ -32,6 +33,6 @@ class PagoChequeQueries:
             id_pago_cheque=c.id_pago_cheque,
             id_pago=c.id_pago,
             id_cheque=c.id_cheque,
-            monto=float(c.monto),
+            monto=float(cast(Decimal, c.monto)),
             fecha_aplicacion=c.fecha_aplicacion
         )

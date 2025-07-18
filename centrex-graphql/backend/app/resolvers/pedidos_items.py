@@ -1,5 +1,6 @@
 import strawberry
-from typing import List, Optional
+from typing import List, Optional, cast
+from decimal import Decimal
 from app.schemas.pedidos_items import PedidoItemType
 from app.db import SessionLocal
 from app.crud.pedidos_items import get_pedido_item, get_pedidos_items
@@ -16,9 +17,9 @@ class PedidoItemQueries:
                 id_pedido_item=c.id_pedido_item,
                 id_pedido=c.id_pedido,
                 id_item=c.id_item,
-                cantidad=float(c.cantidad),
-                precio_unitario=float(c.precio_unitario),
-                subtotal=float(c.subtotal)
+                cantidad=float(cast(Decimal, c.cantidad)),
+                precio_unitario=float(cast(Decimal, c.precio_unitario)),
+                subtotal=float(cast(Decimal, c.subtotal))
             ) for c in result
         ]
 
@@ -33,7 +34,7 @@ class PedidoItemQueries:
             id_pedido_item=c.id_pedido_item,
             id_pedido=c.id_pedido,
             id_item=c.id_item,
-            cantidad=float(c.cantidad),
-            precio_unitario=float(c.precio_unitario),
-            subtotal=float(c.subtotal)
+            cantidad=float(cast(Decimal, c.cantidad)),
+            precio_unitario=float(cast(Decimal, c.precio_unitario)),
+            subtotal=float(cast(Decimal, c.subtotal))
         )

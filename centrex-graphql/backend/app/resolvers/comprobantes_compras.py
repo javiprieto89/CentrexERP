@@ -1,5 +1,6 @@
 import strawberry
-from typing import List, Optional
+from typing import List, Optional, cast
+from decimal import Decimal
 from app.schemas.comprobantes_compras import ComprobanteCompraType
 from app.db import SessionLocal
 from app.crud.comprobantes_compras import get_comprobante_compra, get_comprobantes_compras
@@ -18,7 +19,7 @@ class ComprobanteCompraQueries:
                 fecha=c.fecha,
                 tipo_comprobante=c.tipo_comprobante,
                 numero=c.numero,
-                total=float(c.total),
+                total=float(cast(Decimal, c.total)),
                 estado=c.estado,
                 observaciones=c.observaciones
             ) for c in result
@@ -37,7 +38,7 @@ class ComprobanteCompraQueries:
             fecha=c.fecha,
             tipo_comprobante=c.tipo_comprobante,
             numero=c.numero,
-            total=float(c.total),
+            total=float(cast(Decimal, c.total)),
             estado=c.estado,
             observaciones=c.observaciones
         )

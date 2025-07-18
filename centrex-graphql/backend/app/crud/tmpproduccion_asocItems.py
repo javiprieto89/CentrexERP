@@ -21,6 +21,10 @@ def update_tmpproduccion_asocItem(db: Session, db_obj, updates):
     db.refresh(db_obj)
     return db_obj
 
-def delete_tmpproduccion_asocItem(db: Session, db_obj):
-    db.delete(db_obj)
+def delete_tmpproduccion_asocItem(db: Session, id_asoc: int) -> bool:
+    obj = db.query(TmpProduccionAsocItem).filter(TmpProduccionAsocItem.id_tmpProduccionAsocItem == id_asoc).first()
+    if not obj:
+        return False
+    db.delete(obj)
     db.commit()
+    return True
