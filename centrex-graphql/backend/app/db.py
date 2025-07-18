@@ -10,7 +10,9 @@ SQLALCHEMY_DATABASE_URL = os.getenv(
     "mssql+pyodbc://sa:Ladeda78@127.0.0.1/dbCentrex?driver=ODBC+Driver+17+for+SQL+Server",
 )
 
-engine_kwargs = {"echo": True}
+engine_kwargs = {
+    "echo": os.getenv("SQLALCHEMY_ECHO", "false").lower() == "true"
+}
 if SQLALCHEMY_DATABASE_URL.startswith("mssql+pyodbc"):
     engine_kwargs["fast_executemany"] = True
 
