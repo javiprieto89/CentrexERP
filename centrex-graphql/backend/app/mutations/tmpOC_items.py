@@ -2,7 +2,12 @@ import strawberry
 from typing import Optional
 from app.schemas.tmpOC_items import TmpOCItemType, TmpOCItemInput
 from app.db import SessionLocal
-from app.crud.tmpOC_items import create_tmpOC_item, update_tmpOC_item, delete_tmpOC_item
+from app.crud.tmpOC_items import (
+    create_tmpOC_item,
+    update_tmpOC_item,
+    delete_tmpOC_item,
+    get_tmpOC_items_by_id,
+)
 
 @strawberry.type
 class TmpOCItemMutations:
@@ -25,6 +30,10 @@ class TmpOCItemMutations:
     @strawberry.mutation
     def delete_tmp_oc_item(self, id_tmpOCItem: int) -> bool:
         db = SessionLocal()
-        result = delete_tmpOC_item(db, id_tmpOCItem)
+        obj = get_tmpOC_items_by_id(db, id_tmpOCItem)
+        if not obj:
+            db.close()
+            return False
+        delete_tmpOC_item(db, obj)
         db.close()
-        return result
+        return True

@@ -2,7 +2,12 @@ import strawberry
 from typing import Optional
 from app.schemas.tmppedidos_items import TmpPedidoItemType, TmpPedidoItemInput
 from app.db import SessionLocal
-from app.crud.tmppedidos_items import create_tmppedido_item, update_tmppedido_item, delete_tmppedido_item
+from app.crud.tmppedidos_items import (
+    create_tmppedido_item,
+    update_tmppedido_item,
+    delete_tmppedido_item,
+    get_tmppedidos_items_by_id,
+)
 
 @strawberry.type
 class TmpPedidoItemMutations:
@@ -25,6 +30,10 @@ class TmpPedidoItemMutations:
     @strawberry.mutation
     def delete_tmp_pedido_item(self, id_tmpPedidoItem: int) -> bool:
         db = SessionLocal()
-        result = delete_tmppedido_item(db, id_tmpPedidoItem)
+        obj = get_tmppedidos_items_by_id(db, id_tmpPedidoItem)
+        if not obj:
+            db.close()
+            return False
+        delete_tmppedido_item(db, obj)
         db.close()
-        return result
+        return True

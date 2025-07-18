@@ -2,7 +2,12 @@ import strawberry
 from typing import Optional
 from app.schemas.sys_ClasesFiscales import SysClaseFiscalType, SysClaseFiscalInput
 from app.db import SessionLocal
-from app.crud.sys_ClasesFiscales import create_sysClasesFiscales, update_sysClasesFiscales, delete_sysClasesFiscales
+from app.crud.sys_ClasesFiscales import (
+    create_sysClasesFiscales,
+    update_sysClasesFiscales,
+    delete_sysClasesFiscales,
+    get_sysClasesFiscales_by_id,
+)
 
 @strawberry.type
 class SysClaseFiscalMutations:
@@ -25,6 +30,10 @@ class SysClaseFiscalMutations:
     @strawberry.mutation
     def delete_sys_clase_fiscal(self, id_claseFiscal: int) -> bool:
         db = SessionLocal()
-        result = delete_sysClasesFiscales(db, id_claseFiscal)
+        obj = get_sysClasesFiscales_by_id(db, id_claseFiscal)
+        if not obj:
+            db.close()
+            return False
+        delete_sysClasesFiscales(db, obj)
         db.close()
-        return result
+        return True

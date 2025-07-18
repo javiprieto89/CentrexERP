@@ -1,5 +1,7 @@
+# app/resolvers/cc_proveedores.py
 import strawberry
-from typing import List, Optional
+from typing import List, Optional, cast
+from decimal import Decimal
 from app.schemas.cc_proveedores import CCProveedorType
 from app.db import SessionLocal
 from app.crud.cc_proveedores import get_cc_proveedor, get_cc_proveedores
@@ -19,9 +21,9 @@ class CCProveedorQueries:
                 tipo=c.tipo,
                 id_comprobante=c.id_comprobante,
                 detalle=c.detalle,
-                debe=float(c.debe) if c.debe is not None else None,
-                haber=float(c.haber) if c.haber is not None else None,
-                saldo=float(c.saldo) if c.saldo is not None else None
+                debe=float(cast(Decimal, c.debe)) if c.debe is not None else None,
+                haber=float(cast(Decimal, c.haber)) if c.haber is not None else None,
+                saldo=float(cast(Decimal, c.saldo)) if c.saldo is not None else None
             ) for c in result
         ]
 
@@ -39,7 +41,7 @@ class CCProveedorQueries:
             tipo=c.tipo,
             id_comprobante=c.id_comprobante,
             detalle=c.detalle,
-            debe=float(c.debe) if c.debe is not None else None,
-            haber=float(c.haber) if c.haber is not None else None,
-            saldo=float(c.saldo) if c.saldo is not None else None
+            debe=float(cast(Decimal, c.debe)) if c.debe is not None else None,
+            haber=float(cast(Decimal, c.haber)) if c.haber is not None else None,
+            saldo=float(cast(Decimal, c.saldo)) if c.saldo is not None else None
         )

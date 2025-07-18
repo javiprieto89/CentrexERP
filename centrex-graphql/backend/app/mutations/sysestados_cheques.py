@@ -2,7 +2,12 @@ import strawberry
 from typing import Optional
 from app.schemas.sysestados_cheques import SysEstadoChequeType, SysEstadoChequeInput
 from app.db import SessionLocal
-from app.crud.sysestados_cheques import create_sysestado_cheque, update_sysestado_cheque, delete_sysestado_cheque
+from app.crud.sysestados_cheques import (
+    create_sysestado_cheque,
+    update_sysestado_cheque,
+    delete_sysestado_cheque,
+    get_sysestados_cheques_by_id,
+)
 
 @strawberry.type
 class SysEstadoChequeMutations:
@@ -25,6 +30,10 @@ class SysEstadoChequeMutations:
     @strawberry.mutation
     def delete_sys_estado_cheque(self, id_estadoCheque: int) -> bool:
         db = SessionLocal()
-        result = delete_sysestado_cheque(db, id_estadoCheque)
+        obj = get_sysestados_cheques_by_id(db, id_estadoCheque)
+        if not obj:
+            db.close()
+            return False
+        delete_sysestado_cheque(db, obj)
         db.close()
-        return result
+        return True

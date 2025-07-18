@@ -1,5 +1,7 @@
+# app/resolvers/pagos_nFacturas_importes.py
 import strawberry
-from typing import List, Optional
+from typing import List, Optional, cast
+from decimal import Decimal
 from app.schemas.pagos_nFacturas_importes import PagoNFacturaImporteType
 from app.db import SessionLocal
 from app.crud.pagos_nFacturas_importes import get_pago_nfactura_importe, get_pagos_nfacturas_importes
@@ -16,7 +18,7 @@ class PagoNFacturaImporteQueries:
                 id_pago_factura=c.id_pago_factura,
                 id_pago=c.id_pago,
                 id_factura=c.id_factura,
-                importe=float(c.importe)
+                importe=float(cast(Decimal, c.importe))
             ) for c in result
         ]
 
@@ -31,5 +33,5 @@ class PagoNFacturaImporteQueries:
             id_pago_factura=c.id_pago_factura,
             id_pago=c.id_pago,
             id_factura=c.id_factura,
-            importe=float(c.importe)
+            importe=float(cast(Decimal, c.importe))
         )
